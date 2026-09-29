@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вкусные Рецепты — Кулинарный Сайт</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- НАЧАЛО САЙТА: СТИЛЬНАЯ ШАПКА -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="brand">
+                <h1>Мир Кулинарных Рецептов</h1>
+                <p>Выберите категорию, найдите любимое блюдо и приготовьте его по шагам</p>
+            </div>
+            <div class="header-contacts">
+                <a href="tel:+79991234567" class="header-phone">📞 +7 (999) 123-45-67</a>
+                <div class="header-socials">
+                    <a href="https://t.me" target="_blank" class="social-icon telegram">TG</a>
+                    <a href="https://vk.com" target="_blank" class="social-icon vk">VK</a>
+                    <a href="https://wa.me" target="_blank" class="social-icon whatsapp">WA</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="container">
+        
+        <!-- ЭКРАН 1: ВСЕ КАТЕГОРИИ (СТРОГО ПО 3 В РЯД) -->
+        <div id="screen-categories">
+            <div class="categories-grid">
+                <div class="category-card" onclick="showCategory('soups')">
+                    <div class="category-img" style="background-image: url('images/soups_main.jpg')"></div>
+                    <h2>Супы (Первые блюда)</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('main_dishes')">
+                    <div class="category-img" style="background-image: url('images/main_dishes_main.jpg')"></div>
+                    <h2>Горячие (Вторые блюда)</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('side_dishes')">
+                    <div class="category-img" style="background-image: url('images/side_dishes_main.jpg')"></div>
+                    <h2>Гарниры</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('salads')">
+                    <div class="category-img" style="background-image: url('images/salads_main.jpg')"></div>
+                    <h2>Салаты</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('appetizers')">
+                    <div class="category-img" style="background-image: url('images/appetizers_main.jpg')"></div>
+                    <h2>Закуски</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('desserts')">
+                    <div class="category-img" style="background-image: url('images/desserts_main.jpg')"></div>
+                    <h2>Выпечка и десерты</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('breakfast')">
+                    <div class="category-img" style="background-image: url('images/breakfast_main.jpg')"></div>
+                    <h2>Завтраки</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('sauces')">
+                    <div class="category-img" style="background-image: url('images/sauces_main.jpg')"></div>
+                    <h2>Соусы и заправки</h2>
+                </div>
+                <div class="category-card" onclick="showCategory('drinks')">
+                    <div class="category-img" style="background-image: url('images/drinks_main.jpg')"></div>
+                    <h2>Напитки</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЭКРАН 2: СПИСОК БЛЮД КАТЕГОРИИ -->
+        <div id="screen-recipes" class="hidden">
+            <button class="btn-back" onclick="goToCategories()">← К категориям</button>
+            <h2 id="category-title" style="margin-bottom: 1.5rem;">Название категории</h2>
+            <div class="recipes-grid" id="recipes-container"></div>
+        </div>
+
+        <!-- ЭКРАН 3: ПОШАГОВЫЙ РЕЦЕПТ -->
+        <div id="screen-detail" class="hidden">
+            <button class="btn-back" id="btn-to-recipes">← К списку блюд</button>
+            <div class="recipe-detail" id="recipe-detail-container"></div>
+        </div>
+
+    </div>
+
+    <!-- КОНЕЦ САЙТА: МЯГКИЙ ПОДВАЛ (FOOTER) -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>О нашем ресторане</h3>
+                <p>Мы готовим с любовью исключительно из свежих локальных продуктов. Ждём вас в гости!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Режим работы</h3>
+                <p>Понедельник — Пятница: 09:00 - 23:00</p>
+                <p>Суббота — Воскресенье: 10:00 - 01:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты и соцсети</h3>
+                <p>📍 ул. Кулинарная, д. 42</p>
+                <p>📞 +7 (999) 123-45-67</p>
+                <div class="footer-socials">
+                    <a href="https://t.me" target="_blank" class="social-icon telegram">TG</a>
+                    <a href="https://vk.com" target="_blank" class="social-icon vk">VK</a>
+                    <a href="https://wa.me" target="_blank" class="social-icon whatsapp">WA</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Мир Кулинарных Рецептов. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="recipes-data.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
