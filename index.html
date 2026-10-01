@@ -100,6 +100,10 @@
                         <li onclick="showCategory('main_dishes')">🥩 Горячее</li>
                         <li onclick="showCategory('desserts')">🍰 Десерты</li>
                         <li onclick="showCategory('breakfast')">🍳 Завтраки</li>
+                        <li onclick="showCategory('seafood')">🦪 Морепродукты</li>
+                        <li onclick="showCategory('pizzas')">🍕 Пиццы</li>
+                        <li onclick="showCategory('fastfood')">🍔 Фастфуд</li>
+
                     </ul>
                 </div>
                 
@@ -126,6 +130,21 @@
                     <div class="category-img" style="background-image: url('images/side_dishes_main.jpg')"></div>
                     <h2>Гарниры</h2>
                 </div>
+                <div class="category-card" onclick="showCategory('seafood')" onmouseenter="playHoverSound()">
+                <div class="category-img" style="background-image: url('images/mussels.jpg')"></div>
+                <h2>Морепродукты</h2>
+                </div>
+
+                <div class="category-card" onclick="showCategory('pizzas')" onmouseenter="playHoverSound()">
+                    <div class="category-img" style="background-image: url('images/pizza_pepperoni.jpg')"></div>
+                    <h2>Пиццы</h2>
+                </div>
+
+                <div class="category-card" onclick="showCategory('fastfood')" onmouseenter="playHoverSound()">
+                    <div class="category-img" style="background-image: url('images/burger.jpg')"></div>
+                    <h2>Фастфуд</h2>
+                </div>
+
                 <div class="category-card" onclick="showCategory('salads')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/salads_main.jpg')"></div>
                     <h2>Салаты</h2>
@@ -150,6 +169,7 @@
                     <div class="category-img" style="background-image: url('images/drinks_main.jpg')"></div>
                     <h2>Напитки</h2>
                 </div>
+                
             </main>
 
             <!-- ПРАВАЯ ПАНЕЛЬ -->
