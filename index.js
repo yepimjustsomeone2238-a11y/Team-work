@@ -38,13 +38,24 @@ function playSuccessSound() {
     }, 120);
 } 
 
+// УЛЬТРА-ЗВОНКИЙ И ГРОМКИЙ ДЗЫНЬ КАССЫ ПРИ ОПЛАТЕ
+function playMoneySound() {
+    // Высокая чистая нота на максимальной громкости (0.9)
+    playSound(2637.02, 'sine', 0.8, 0.9); 
+    
+    // Эффект хрустального эха через 50мс
+    setTimeout(() => {
+        playSound(3135.96, 'sine', 0.5, 0.6);
+    }, 50);
+}
+
 function startScanningSound() {
     scanIntervalAudio = setInterval(() => { playSound(330, 'triangle', 0.15, 0.15); }, 150);
 }
 function stopScanningSound() {
     if (scanIntervalAudio) { clearInterval(scanIntervalAudio); scanIntervalAudio = null; }
 }
-// --- НАВИГАЦИЯ И ИНТЕРФЕЙС ЭКРАНОВ ---
+// --- НАВІГАЦІЯ ТА ІНТЕРФЕЙС ЕКРАНІВ ---
 function toggleTheme() { document.body.classList.toggle('dark-mode'); playClickSound(); }
 function goToCategories() { playClickSound(); screenRecipes.classList.add('hidden'); screenCategories.classList.remove('hidden'); }
 function closeOrderModal() { playClickSound(); modalOrder.classList.add('hidden'); }
@@ -81,7 +92,7 @@ function showRecipeDetail(recipe) {
     screenRecipes.classList.add('hidden'); screenDetail.classList.remove('hidden');
 }
 
-// --- КОРЗИНА И ОНЛАЙН-МАГАЗИН С ФИКСОМ СКИДКИ ---
+// --- КОШИК ТА ОНЛАЙН-МАГАЗИН ІЗ ФІКСОМ ЗНИЖКИ ---
 function openOrderModal() {
     playCartSound();
     const container = document.getElementById('modal-menu-container'); container.innerHTML = ''; 
@@ -89,7 +100,7 @@ function openOrderModal() {
         database[key].items.forEach(recipe => {
             let uah = recipe.price;
             
-            // Проверка на ребрышки для вывода цены со скидкой 552 ₴ вместо 690 ₴
+            // Перевірка на реберця для відображення ціни зі знижкою 552 ₴ замість 690 ₴
             if (recipe.id === "ribs" || recipe.name.toLowerCase() === "свиные ребрышки барбекю") {
                 uah = 552;
             }
@@ -107,7 +118,7 @@ function addToCart(name, uahPrice) {
     playCartSound(); 
     let finalPrice = uahPrice;
     
-    // Перехват цены акционных ребрышек при клике
+    // Перехоплення ціни акційних реберець при кліку
     if (name.toLowerCase() === "свиные ребрышки барбекю" || name.toLowerCase() === "свиные ребрышки bbq") {
         finalPrice = 552;
     }
@@ -128,7 +139,7 @@ function updateCartUI() {
     });
     totalSpan.innerText = `${totalUah} ₴ / $${(totalUah / 40).toFixed(2)}`;
 }
-// --- ОКНО ОБШИРНОЙ ОПЛАТЫ И ИМИТАЦИЯ БАНКА ---
+// --- ВІКНО ОБШИРНОЇ ОПЛАТИ ТА ІМІТАЦІЯ БАНКУ З ПОВНИМ ЦИКЛОМ АНІМАЦІЇ ---
 function openPaymentModal() {
     if (cart.length === 0) { showNotificationToast(); return; }
     playClickSound();
@@ -163,25 +174,51 @@ function setupCardMasks() {
 function processCardPayment() {
     const n = document.getElementById('card-number').value, e = document.getElementById('card-expiry').value, c = document.getElementById('card-cvv').value, m = document.getElementById('card-name').value;
     if (n.length < 19 || e.length < 5 || c.length < 3 || m.trim() === '') { playErrorSound(); alert('❌ Заполните карту корректно!'); return; }
-    const btn = document.getElementById('btn-submit-payment-action'); btn.classList.add('processing'); btn.querySelector('.btn-text-content').innerText = 'Проверка...'; 
-    playClickSound(); startScanningSound();
+    
+    const btn = document.getElementById('btn-submit-payment-action'); 
+    btn.classList.add('processing'); 
+    btn.querySelector('.btn-text-content').innerText = 'Проверка карты...'; 
+    
+    playClickSound(); 
+    startScanningSound(); // Вмикаємо звук очікування відповіді банку
+    
+    // ЕТАП 1: Через 2 секунди з'являється вікно авторизації з синім пульсуючим колом
     setTimeout(() => {
-        const overlay = document.createElement('div'); overlay.className = 'payment-status-overlay';
-        overlay.innerHTML = `<div class="pulse-circle"></div><div class="status-text-anim">Авторизация банка...</div>`;
+        const overlay = document.createElement('div'); 
+        overlay.className = 'payment-status-overlay';
+        overlay.innerHTML = `
+            <div class="pulse-circle"></div>
+            <div class="status-text-anim" id="overlay-status-title">Авторизация банка...</div>
+        `;
         modalPayment.querySelector('.payment-layout-container').appendChild(overlay);
+        
+        // ЕТАП 2: Ще через 2.5 секунди банк дає згоду — коло стає зеленим і лунає гучний ДЗИНЬ!
         setTimeout(() => {
-            stopScanningSound(); playSuccessSound(); 
-            overlay.querySelector('.pulse-circle').style.backgroundColor = '#1ebd5a';
-            overlay.querySelector('.status-text-anim').innerHTML = `
-                ✅ Оплата успешно завершена!<br>
-                <span style="font-size:0.9rem; font-weight:normal; color:#718096;">Ресторан готовит заказ. Курьер будет через 30 минут.</span>
-            `;
-            setTimeout(() => { cart = []; updateCartUI(); closePaymentModal(); }, 2500);
+            stopScanningSound(); // Вимикаємо звук сканування
+            
+            // КРИСТАЛЬНО ГУЧНИЙ ТА ДЗВІНКИЙ ДЗИНЬ КАСИ!
+            playMoneySound(); 
+            
+            // Фарбуємо коло в зелений колір успіху
+            const circle = overlay.querySelector('.pulse-circle');
+            if (circle) circle.style.backgroundColor = '#1ebd5a';
+            
+            // Змінюємо текст на успішне завершення
+            const title = document.getElementById('overlay-status-title');
+            if (title) {
+                title.innerHTML = `
+                    ✅ Оплата успешно завершена!<br>
+                    <span style="font-size:0.9rem; font-weight:normal; color:#718096;">Ресторан готовит заказ. Курьер будет через 30 минут.</span>
+                `;
+            }
+            
+            // Очищаємо кошик і закриваємо модалку
+            setTimeout(() => { cart = []; updateCartUI(); closePaymentModal(); }, 3000);
         }, 2500);
     }, 2000);
 }
 
-// --- ЧАСОВОЙ МОНИТОРИНГ И ИМИТАЦИЯ ПОКУПАТЕЛЕЙ С ФИКСАЦИЕЙ ЦЕНЫ ---
+// --- ЧАСОВИЙ МОНІТОРИНГ ТА ІМІТАЦІЯ ПОКУПЦІВ З ФІКСАЦІЄЮ ЦІНИ ---
 function startLiveTracker() {
     const fakeNames = ["Богдан", "Оксана", "Ярослав", "София", "Тарас", "Марьяна", "Максим", "Наталья", "Виталий", "Юлия", "Арсен", "Кристина"];
     const fakeDishes = [];
@@ -206,7 +243,6 @@ function startLiveTracker() {
         const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
         let dish = fakeDishes[Math.floor(Math.random() * fakeDishes.length)];
         
-        // В трекере также красиво выводим ребрышки с их акционной ценой
         if (dish.toLowerCase() === "свиные ребрышки барбекю") {
             dish = "свиные ребрышки барбекю за 🔥 552 ₴";
         }
