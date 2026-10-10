@@ -75,12 +75,17 @@ function showCategory(categoryKey) {
         categoryData.items.forEach(recipe => {
             const card = document.createElement('div'); card.className = 'recipe-card';
             card.onclick = function() { showRecipeDetail(recipe); };
+            
+            // ДОБАВЛЕНО: Воспроизведение звукаtriangle при наведении мыши на карточку блюда
+            card.onmouseenter = playHoverSound;
+            
             card.innerHTML = `<div class="recipe-img"><img src="${recipe.imgUrl}"></div><div class="recipe-info"><h3>${recipe.name}</h3></div>`;
             container.appendChild(card);
         });
     }
     screenCategories.classList.add('hidden'); screenRecipes.classList.remove('hidden'); screenDetail.classList.add('hidden');
 }
+
 
 function showRecipeDetail(recipe) {
     playCartSound();
