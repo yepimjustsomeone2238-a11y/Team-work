@@ -7,7 +7,7 @@ const toastNotification = document.getElementById('notification-toast');
 let cart = [];
 let scanIntervalAudio = null;
 
-// --- СТАБИЛЬНЫЙ ЗВУКОВОЙ ДВИЖОК (WEB AUDIO API) ---
+// --- СТАБІЛЬНИЙ ЗВУКОВИЙ ДВИЖОК (WEB AUDIO API) ---
 function playSound(frequency, type, duration, volume = 0.25) {
     try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -18,7 +18,7 @@ function playSound(frequency, type, duration, volume = 0.25) {
         gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
         oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
         oscillator.start(); oscillator.stop(audioCtx.currentTime + duration);
-    } catch (e) { console.log("Звук требует клика по экрану"); }
+    } catch (e) { console.log("Звук вимагає кліку по екрану"); }
 }
 
 function playHoverSound() { playSound(450, 'triangle', 0.05, 0.2); } 
@@ -38,12 +38,12 @@ function playSuccessSound() {
     }, 120);
 } 
 
-// УЛЬТРА-ЗВОНКИЙ И ГРОМКИЙ ДЗЫНЬ КАССЫ ПРИ ОПЛАТЕ
+// УЛЬТРА-ДЗВІНКІЙ ТА ҐУЧНИЙ ДЗИНЬ КАСИ ПРИ ОПЛАТІ
 function playMoneySound() {
-    // Высокая чистая нота на максимальной громкости (0.9)
+    // Висока чиста нота на максимальній гучності (0.9)
     playSound(2637.02, 'sine', 0.8, 0.9); 
     
-    // Эффект хрустального эха через 50мс
+    // Ефект кришталевого відлуння через 50мс
     setTimeout(() => {
         playSound(3135.96, 'sine', 0.5, 0.6);
     }, 50);
@@ -76,7 +76,7 @@ function showCategory(categoryKey) {
             const card = document.createElement('div'); card.className = 'recipe-card';
             card.onclick = function() { showRecipeDetail(recipe); };
             
-            // ДОБАВЛЕНО: Воспроизведение звукаtriangle при наведении мыши на карточку блюда
+            // ДОДАНО: Відтворення звуку triangle при наведенні миші на картку страви
             card.onmouseenter = playHoverSound;
             
             card.innerHTML = `<div class="recipe-img"><img src="${recipe.imgUrl}"></div><div class="recipe-info"><h3>${recipe.name}</h3></div>`;
@@ -93,7 +93,7 @@ function showRecipeDetail(recipe) {
     document.getElementById('btn-to-recipes').onclick = function() { playClickSound(); screenDetail.classList.add('hidden'); screenRecipes.classList.remove('hidden'); };
     const ingredientsHTML = recipe.ingredients.map(ing => `<li>${ing}</li>`).join('');
     const stepsHTML = recipe.steps.map((step, idx) => `<div class="step-item"><span class="step-number">${idx + 1}</span> ${step}</div>`).join('');
-    container.innerHTML = `<div class="main-recipe-img"><img src="${recipe.imgUrl}"></div><h2>${recipe.name}</h2><div class="ingredients-section"><h4>Ингредиенты:</h4><ul>${ingredientsHTML}</ul></div><div class="steps-section"><h4>Пошаговое приготовление:</h4><div>${stepsHTML}</div></div>`;
+    container.innerHTML = `<div class="main-recipe-img"><img src="${recipe.imgUrl}"></div><h2>${recipe.name}</h2><div class="ingredients-section"><h4>Інгредієнти:</h4><ul>${ingredientsHTML}</ul></div><div class="steps-section"><h4>Покрокове приготування:</h4><div>${stepsHTML}</div></div>`;
     screenRecipes.classList.add('hidden'); screenDetail.classList.remove('hidden');
 }
 
@@ -112,7 +112,7 @@ function openOrderModal() {
             
             const usd = (uah / 40).toFixed(2); 
             const itemCard = document.createElement('div'); itemCard.className = 'modal-item-card';
-            itemCard.innerHTML = `<div class="modal-item-img" style="background-image: url('${recipe.imgUrl}')"></div><div class="modal-item-info"><h4>${recipe.name}</h4><div class="modal-item-meta"><div class="modal-item-price"><span>${uah} ₴</span><span style="font-size:0.8rem; color:#a0aec0;">$${usd}</span></div><button class="btn-modal-add" onclick="addToCart('${recipe.name}', ${uah})">В корзину</button></div></div>`;
+            itemCard.innerHTML = `<div class="modal-item-img" style="background-image: url('${recipe.imgUrl}')"></div><div class="modal-item-info"><h4>${recipe.name}</h4><div class="modal-item-meta"><div class="modal-item-price"><span>${uah} ₴</span><span style="font-size:0.8rem; color:#a0aec0;">$${usd}</span></div><button class="btn-modal-add" onclick="addToCart('${recipe.name}', ${uah})">У кошик</button></div></div>`;
             container.appendChild(itemCard);
         });
     }
@@ -123,7 +123,7 @@ function addToCart(name, uahPrice) {
     playCartSound(); 
     let finalPrice = uahPrice;
     
-    // Перехоплення ціни акційних реберець при кліку
+    // Перехоплення ціни акційних реберців при кліку
     if (name.toLowerCase() === "свиные ребрышки барбекю" || name.toLowerCase() === "свиные ребрышки bbq") {
         finalPrice = 552;
     }
@@ -134,7 +134,7 @@ function addToCart(name, uahPrice) {
 
 function updateCartUI() {
     const container = document.getElementById('cart-items-container'), totalSpan = document.getElementById('cart-total-price');
-    if (cart.length === 0) { container.innerHTML = '<p class="empty-cart-msg">Корзина пуста.</p>'; totalSpan.innerText = '0 ₴ / \$0.00'; return; }
+    if (cart.length === 0) { container.innerHTML = '<p class="empty-cart-msg">Кошик порожній.</p>'; totalSpan.innerText = '0 ₴ / \$0.00'; return; }
     container.innerHTML = ''; let totalUah = 0;
     cart.forEach(item => {
         totalUah += item.price;
@@ -150,14 +150,14 @@ function openPaymentModal() {
     playClickSound();
     const totalUah = cart.reduce((sum, item) => sum + item.price, 0), totalUsd = (totalUah / 40).toFixed(2);
     modalPayment.querySelector('.modal-content').innerHTML = `
-        <div class="modal-header-box"><h2>Оплата картой 💳</h2><span class="close-modal" onclick="closePaymentModal()">&times;</span></div>
+        <div class="modal-header-box"><h2>Оплата карткою 💳</h2><span class="close-modal" onclick="closePaymentModal()">&times;</span></div>
         <div class="payment-layout-container">
-            <div class="receipt-box"><h4>Ваш чек:</h4><div class="receipt-list" id="modal-receipt-items"></div><div class="receipt-total"><span>Итого:</span><span>${totalUah} ₴ / $${totalUsd}</span></div></div>
+            <div class="receipt-box"><h4>Ваш чек:</h4><div class="receipt-list" id="modal-receipt-items"></div><div class="receipt-total"><span>Всього:</span><span>${totalUah} ₴ / $${totalUsd}</span></div></div>
             <div class="payment-form">
-                <div class="form-group"><label>Номер карты</label><input type="text" id="card-number" placeholder="4400 5511 2233 4455" maxlength="19"></div>
-                <div style="display:flex; gap:1rem;"><div class="form-group" style="flex:1;"><label>Срок</label><input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5"></div><div class="form-group" style="flex:1;"><label>CVC</label><input type="password" id="card-cvv" placeholder="•••" maxlength="3"></div></div>
-                <div class="form-group"><label>Имя</label><input type="text" id="card-name" placeholder="IVAN IVANOV" style="text-transform:uppercase;"></div>
-                <button class="btn-pay-submit" id="btn-submit-payment-action" onclick="processCardPayment()"><span class="spinner-icon"></span><span class="btn-text-content">Оплатить заказ</span></button>
+                <div class="form-group"><label>Номер картки</label><input type="text" id="card-number" placeholder="4400 5511 2233 4455" maxlength="19"></div>
+                <div style="display:flex; gap:1rem;"><div class="form-group" style="flex:1;"><label>Термін</label><input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5"></div><div class="form-group" style="flex:1;"><label>CVC</label><input type="password" id="card-cvv" placeholder="•••" maxlength="3"></div></div>
+                <div class="form-group"><label>Ім'я</label><input type="text" id="card-name" placeholder="IVAN IVANOV" style="text-transform:uppercase;"></div>
+                <button class="btn-pay-submit" id="btn-submit-payment-action" onclick="processCardPayment()"><span class="spinner-icon"></span><span class="btn-text-content">Оплатити замовлення</span></button>
             </div>
         </div>`;
     const receiptList = document.getElementById('modal-receipt-items');
@@ -178,11 +178,11 @@ function setupCardMasks() {
 
 function processCardPayment() {
     const n = document.getElementById('card-number').value, e = document.getElementById('card-expiry').value, c = document.getElementById('card-cvv').value, m = document.getElementById('card-name').value;
-    if (n.length < 19 || e.length < 5 || c.length < 3 || m.trim() === '') { playErrorSound(); alert('❌ Заполните карту корректно!'); return; }
+    if (n.length < 19 || e.length < 5 || c.length < 3 || m.trim() === '') { playErrorSound(); alert('❌ Заповніть картку коректно!'); return; }
     
     const btn = document.getElementById('btn-submit-payment-action'); 
     btn.classList.add('processing'); 
-    btn.querySelector('.btn-text-content').innerText = 'Проверка карты...'; 
+    btn.querySelector('.btn-text-content').innerText = 'Перевірка картки...'; 
     
     playClickSound(); 
     startScanningSound(); // Вмикаємо звук очікування відповіді банку
@@ -193,7 +193,7 @@ function processCardPayment() {
         overlay.className = 'payment-status-overlay';
         overlay.innerHTML = `
             <div class="pulse-circle"></div>
-            <div class="status-text-anim" id="overlay-status-title">Авторизация банка...</div>
+            <div class="status-text-anim" id="overlay-status-title">Авторизація банку...</div>
         `;
         modalPayment.querySelector('.payment-layout-container').appendChild(overlay);
         
@@ -201,7 +201,7 @@ function processCardPayment() {
         setTimeout(() => {
             stopScanningSound(); // Вимикаємо звук сканування
             
-            // КРИСТАЛЬНО ГУЧНИЙ ТА ДЗВІНКИЙ ДЗИНЬ КАСИ!
+            // КРИСТАЛЬНО ГУЧНИЙ ТА ДЗВІНКІЙ ДЗИНЬ КАСИ!
             playMoneySound(); 
             
             // Фарбуємо коло в зелений колір успіху
@@ -212,8 +212,8 @@ function processCardPayment() {
             const title = document.getElementById('overlay-status-title');
             if (title) {
                 title.innerHTML = `
-                    ✅ Оплата успешно завершена!<br>
-                    <span style="font-size:0.9rem; font-weight:normal; color:#718096;">Ресторан готовит заказ. Курьер будет через 30 минут.</span>
+                    ✅ Оплата успішно завершена!<br>
+                    <span style="font-size:0.9rem; font-weight:normal; color:#718096;">Ресторан готує замовлення. Кур'єр буде за 30 хвилин.</span>
                 `;
             }
             
@@ -225,7 +225,7 @@ function processCardPayment() {
 
 // --- ЧАСОВИЙ МОНІТОРИНГ ТА ІМІТАЦІЯ ПОКУПЦІВ З ФІКСАЦІЄЮ ЦІНИ ---
 function startLiveTracker() {
-    const fakeNames = ["Богдан", "Оксана", "Ярослав", "София", "Тарас", "Марьяна", "Максим", "Наталья", "Виталий", "Юлия", "Арсен", "Кристина"];
+    const fakeNames = ["Богдан", "Оксана", "Ярослав", "Софія", "Тарас", "Мар'яна", "Максим", "Наталія", "Віталій", "Юлія", "Арсен", "Христина"];
     const fakeDishes = [];
     
     if (typeof database !== 'undefined') {
@@ -234,7 +234,7 @@ function startLiveTracker() {
         }
     }
     if (fakeDishes.length === 0) {
-        fakeDishes.push("пасту карбонара", "классический украинский борщ", "тыквенный крем-суп", "домашние сырники с джемом", "стейк рибай");
+        fakeDishes.push("пасту карбонара", "класичний український борщ", "гарбузовий крем-суп", "домашні сирники з джемом", "стейк рибай");
     }
 
     setInterval(() => {
@@ -249,14 +249,14 @@ function startLiveTracker() {
         let dish = fakeDishes[Math.floor(Math.random() * fakeDishes.length)];
         
         if (dish.toLowerCase() === "свиные ребрышки барбекю") {
-            dish = "свиные ребрышки барбекю за 🔥 552 ₴";
+            dish = "свинячі реберця барбекю за 🔥 552 ₴";
         }
         
         const trackerText = document.getElementById('live-tracker-text');
         if (trackerText) {
             trackerText.style.opacity = 0;
             setTimeout(() => {
-                trackerText.innerHTML = `🔥 <strong>${name}</strong> только что заказал(а) <em style="color:#ff6b6b; font-style:normal; font-weight:600;">${dish}</em>.`;
+                trackerText.innerHTML = `🔥 <strong>${name}</strong> щойно замовив(-ла) <em style="color:#ff6b6b; font-style:normal; font-weight:600;">${dish}</em>.`;
                 trackerText.style.opacity = 1; playSound(650, 'sine', 0.05, 0.05);
             }, 400);
         }

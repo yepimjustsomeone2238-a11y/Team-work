@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вкусные Рецепты — Кулинарный Сайт</title>
+    <title>Смачні Рецепти — Кулінарний Сайт</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-    <!-- УВЕДОМЛЕНИЕ О ПУСТОЙ КОРЗИНЕ -->
+    <!-- ПОВІДОМЛЕННЯ ПРО ПОРОЖНІЙ КОШИК -->
     <div id="notification-toast" class="toast hidden">
         <div class="toast-content">
             <span class="toast-icon">⚠️</span>
             <div class="toast-message">
-                <h4>Ваш аппетит готов, но тарелка пуста! 🍽️</h4>
-                <p>Пожалуйста, загляните в нашу онлайн-витрину заказов и выберите самые сочные блюда перед оформлением доставки.</p>
+                <h4>Ваш апетит готовий, але тарілка порожня! 🍽️</h4>
+                <p>Будь ласка, загляньте в нашу онлайн-вітрину замовлень та виберіть найсоковитіші страви перед оформленням доставки.</p>
             </div>
         </div>
     </div>
 
-    <!-- ШАПКА САЙТА -->
+    <!-- ШАПКА САЙТУ -->
     <header class="main-header">
         <div class="header-container">
             <div class="brand">
-                <h1>Мир Кулинарных Рецептов</h1>
-                <p>Выберите категорию, найдите любимое блюдо и приготовьте его по шагам</p>
+                <h1>Світ Кулінарних Рецептів</h1>
+                <p>Виберіть категорію, знайдіть улюблену страву та приготуйте її по кроках</p>
             </div>
             <div class="header-right-box" style="display: flex; align-items: center; gap: 1.5rem;">
                 <button class="btn-theme-toggle" onclick="toggleTheme()">🌓 Тема</button>
                 <div class="header-contacts">
                     <a href="tel:+380931234567" class="header-phone">📞 +380 (93) 123-45-67</a>
                     <div class="header-socials">
-                        <!-- Ссылки на украинские платформы и мессенджеры -->
+                        <!-- Посилання на українські платформи та месенджери -->
                         <a href="socials.html" target="_blank" class="social-icon telegram" title="Наш Telegram Канал">TG</a>
                         <a href="https://ukr.net" target="_blank" class="social-icon ukrnet" title="Ukr.net">UN</a>
                         <a href="https://censor.net" target="_blank" class="social-icon censor" title="Censor.net">CN</a>
@@ -41,40 +41,40 @@
         </div>
     </header>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <!-- ОСНОВНИЙ КОНТЕНТ -->
     <div class="container">
         <div id="screen-categories" class="main-layout">
-            <!-- ЛЕВАЯ ПАНЕЛЬ С ЧАСАМИ, МОНИТОРИНГОМ И АКЦИЯМИ -->
+            <!-- ЛІВА ПАНЕЛЬ З ГОДИННИКОМ, МОНІТОРИНГОМ ТА АКЦІЯМИ -->
             <aside class="side-panel left-panel">
-                <!-- Блок времени и имитации заказов -->
+                <!-- Блок часу та імітації замовлень -->
                 <div class="widget-box" style="border: 1px solid #ff6b6b;">
-                    <h3>Прямой эфир 🔴</h3>
+                    <h3>Прямий ефір 🔴</h3>
                     <div class="live-clock">
                         <span id="live-clock-time">00:00:00</span>
                     </div>
                     <div class="live-tracker-wrapper">
-                        <div id="live-tracker-text">Ожидаем новые заказы...</div>
+                        <div id="live-tracker-text">Очікуємо нові замовлення...</div>
                     </div>
                 </div>
 
-                <!-- РЕКОМЕНДАЦИЯ ОТ ШЕФ-ПОВАРA -->
+                <!-- РЕКОМЕНДАЦІЯ ВІД ШЕФ-КУХАРЯ -->
                 <div class="widget-box">
-                    <h3>Шеф рекомендует 👨‍🍳</h3>
+                    <h3>Шеф рекомендує 👨‍🍳</h3>
                     <div class="chef-recommend" onclick="showCategory('main_dishes')">
                         <div class="chef-thumb" style="background-image: url('images/carbonara.jpg')"></div>
-                        <p><strong>Паста Карбонара</strong><br>Идеальный сливочный вкус по классическому римскому рецепту.</p>
+                        <p><strong>Паста Карбонара</strong><br>Ідеальний вершковий смак за класичним римським рецептом.</p>
                     </div>
                 </div>
 
-                <!-- АКЦИИ, НОВИНКИ И СКИДКИ -->
+                <!-- АКЦІЇ, НОВИНКИ ТА ЗНИЖКИ -->
                 <div class="widget-box">
-                    <h3>Акции и Новинки 🔥</h3>
-                    <!-- Скидка / Популярное -->
+                    <h3>Акції та Новинки 🔥</h3>
+                    <!-- Знижка / Популярне -->
                     <div class="bento-promo-card" onclick="showCategory('main_dishes')">
                         <div class="promo-bg-image" style="background-image: url('images/main_dishes_main.jpg')">
                             <span class="promo-badge discount">-20% • Топ</span>
                             <div class="promo-text-footer">
-                                <h4>Свиные ребрышки BBQ</h4>
+                                <h4>Свинячі реберця BBQ</h4>
                                 <span class="old-price">690 ₴</span>
                                 <span class="new-price">552 ₴</span>
                             </div>
@@ -85,61 +85,61 @@
                         <div class="promo-bg-image" style="background-image: url('images/lemonade.jpg')">
                             <span class="promo-badge new-item">Новинка</span>
                             <div class="promo-text-footer">
-                                <h4>Цитрусовый коктейль</h4>
+                                <h4>Цитрусовий коктейль</h4>
                                 <span class="new-price">190 ₴</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- НАВИГАЦИЯ -->
+                <!-- НАВІГАЦІЯ -->
                 <div class="widget-box">
-                    <h3>Навигация</h3>
+                    <h3>Навігація</h3>
                     <ul class="quick-nav">
-                        <li onclick="showCategory('soups')">🥣 Супы</li>
-                        <li onclick="showCategory('main_dishes')">🥩 Горячее</li>
-                        <li onclick="showCategory('desserts')">🍰 Десерты</li>
-                        <li onclick="showCategory('breakfast')">🍳 Завтраки</li>
-                        <li onclick="showCategory('seafood')">🦪 Морепродукты</li>
-                        <li onclick="showCategory('pizzas')">🍕 Пиццы</li>
+                        <li onclick="showCategory('soups')">🥣 Супи</li>
+                        <li onclick="showCategory('main_dishes')">🥩 Гаряче</li>
+                        <li onclick="showCategory('desserts')">🍰 Десерти</li>
+                        <li onclick="showCategory('breakfast')">🍳 Сніданки</li>
+                        <li onclick="showCategory('seafood')">🦪 Морепродукти</li>
+                        <li onclick="showCategory('pizzas')">🍕 Піци</li>
                         <li onclick="showCategory('fastfood')">🍔 Фастфуд</li>
-                        <li onclick="showCategory('kids_menu')">🧸 Детское меню</li>
+                        <li onclick="showCategory('kids_menu')">🧸 Дитяче меню</li>
 
 
                     </ul>
                 </div>
                 
-                <!-- БЛЮДО ДНЯ -->
+                <!-- СТРАВА ДНЯ -->
                 <div class="widget-box day-dish-box">
-                    <h3>Блюдо дня 🌟</h3>
+                    <h3>Страва дня 🌟</h3>
                     <div class="day-dish-card" onclick="showCategory('main_dishes')">
                         <div class="day-dish-img" style="background-image: url('images/steak.jpg')"></div>
-                        <h4>Сочный Стейк Рибай</h4>
+                        <h4>Соковитий Стейк Рибай</h4>
                     </div>
                 </div>
             </aside>
-            <!-- ЦЕНТРАЛЬНАЯ СЕТКА BENTO GRID -->
+            <!-- ЦЕНТРАЛЬНА СІТКА BENTO GRID -->
             <main class="categories-grid">
                 <div class="category-card" onclick="showCategory('soups')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/soups_main.jpg')"></div>
-                    <h2>Супы (Первые блюда)</h2>
+                    <h2>Супи (Перші страви)</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('main_dishes')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/main_dishes_main.jpg')"></div>
-                    <h2>Горячие (Вторые блюда)</h2>
+                    <h2>Гарячі (Другі страви)</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('side_dishes')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/side_dishes_main.jpg')"></div>
-                    <h2>Гарниры</h2>
+                    <h2>Гарніри</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('seafood')" onmouseenter="playHoverSound()">
                 <div class="category-img" style="background-image: url('images/mussel.jpg')"></div>
-                <h2>Морепродукты</h2>
+                <h2>Морепродукти</h2>
                 </div>
 
                 <div class="category-card" onclick="showCategory('pizzas')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/pizza.jpg')"></div>
-                    <h2>Пиццы</h2>
+                    <h2>Піци</h2>
                 </div>
 
                 <div class="category-card" onclick="showCategory('fastfood')" onmouseenter="playHoverSound()">
@@ -149,7 +149,7 @@
 
                 <div class="category-card" onclick="showCategory('salads')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/salads_main.jpg')"></div>
-                    <h2>Салаты</h2>
+                    <h2>Салати</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('appetizers')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/appetizers_main.jpg')"></div>
@@ -157,78 +157,78 @@
                 </div>
                 <div class="category-card" onclick="showCategory('desserts')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/desserts_main.jpg')"></div>
-                    <h2>Выпечка и десерты</h2>
+                    <h2>Випічка та десерти</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('breakfast')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/breakfast_main.jpg')"></div>
-                    <h2>Завтраки</h2>
+                    <h2>Сніданки</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('sauces')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/sauces_main.jpg')"></div>
-                    <h2>Соусы и заправки</h2>
+                    <h2>Соуси та заправки</h2>
                 </div>
                 <div class="category-card" onclick="showCategory('drinks')" onmouseenter="playHoverSound()">
                     <div class="category-img" style="background-image: url('images/drinks_main.jpg')"></div>
-                    <h2>Напитки</h2>
+                    <h2>Напої</h2>
                 </div>
                     <div class="category-card" onclick="showCategory('kids_menu')" onmouseenter="playHoverSound()">
                 <div class="category-img" style="background-image: url('images/hellokitty_sandwiches.jpg')"></div>
-                    <h2>Детское меню</h2>
+                    <h2>Дитяче меню</h2>
               </div>
 
                 
             </main>
 
-            <!-- ПРАВАЯ ПАНЕЛЬ -->
+            <!-- ПРАВА ПАНЕЛЬ -->
             <aside class="side-panel right-panel">
                 <div class="widget-box cart-box">
-                    <h3>Ваш заказ 🛍️</h3>
+                    <h3>Ваше замовлення 🛍️</h3>
                     <div id="cart-items-container">
-                        <p class="empty-cart-msg">Корзина пуста.</p>
+                        <p class="empty-cart-msg">Кошик порожній.</p>
                     </div>
                     <div class="cart-summary">
                         <div class="summary-line">
-                            <span>Итого:</span>
+                            <span>Всього:</span>
                             <span id="cart-total-price">0 ₴ / $0.00</span>
                         </div>
-                        <button class="btn-open-menu" onclick="openOrderModal()">Перейти к заказу блюд 🍽️</button>
-                        <button class="btn-order" onclick="openPaymentModal()" style="margin-top: 0.5rem;">Оформить доставку</button>
+                        <button class="btn-open-menu" onclick="openOrderModal()">Перейти до замовлення страв 🍽️</button>
+                        <button class="btn-order" onclick="openPaymentModal()" style="margin-top: 0.5rem;">Оформити доставку</button>
                     </div>
                 </div>
             </aside>
         </div>
 
         <div id="screen-recipes" class="hidden">
-            <button class="btn-back" onclick="goToCategories()">← К категориям</button>
-            <h2 id="category-title" style="margin-bottom: 1.5rem;">Название категории</h2>
+            <button class="btn-back" onclick="goToCategories()">← До категорій</button>
+            <h2 id="category-title" style="margin-bottom: 1.5rem;">Назва категорії</h2>
             <div class="recipes-grid" id="recipes-container"></div>
         </div>
 
         <div id="screen-detail" class="hidden">
-            <button class="btn-back" id="btn-to-recipes">← К списку блюд</button>
+            <button class="btn-back" id="btn-to-recipes">← До списку страв</button>
             <div class="recipe-detail" id="recipe-detail-container"></div>
         </div>
     </div>
 
-    <!-- ОКНО ОНЛАЙН-ЗАКАЗА -->
+    <!-- ВІКНО ОНЛАЙН-ЗАМОВЛЕННЯ -->
     <div id="modal-order" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header-box">
-                <h2>Меню онлайн-заказа ресторана 📋</h2>
+                <h2>Меню онлайн-замовлення ресторану 📋</h2>
                 <span class="close-modal" onclick="closeOrderModal()">&times;</span>
             </div>
             <div class="modal-menu-grid" id="modal-menu-container"></div>
         </div>
     </div>
 
-    <!-- ОКНО ОПЛАТЫ -->
+    <!-- ВІКНО ОПЛАТИ -->
     <div id="modal-payment" class="modal hidden">
         <div class="modal-content"></div>
     </div>
 
     <footer class="main-footer">
         <div class="footer-bottom">
-            <p>&copy; 2026 Мир Кулинарных Рецептов. Все права защищены.</p>
+            <p>&copy; 2026 Світ Кулінарних Рецептів. Всі права захищені.</p>
         </div>
     </footer>
 
