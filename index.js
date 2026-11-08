@@ -86,6 +86,10 @@ function showCategory(categoryKey) {
     screenCategories.classList.add('hidden'); screenRecipes.classList.remove('hidden'); screenDetail.classList.add('hidden');
 }
 
+function showRecipeImmediately(categoryKey, recipe) {
+  showCategory(categoryKey)
+  showRecipeDetail(recipe)
+}
 
 function showRecipeDetail(recipe) {
     playCartSound();
